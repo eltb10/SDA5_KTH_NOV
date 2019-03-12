@@ -21,6 +21,7 @@ public class Task3 implements Serializable{
 	private String project;
 	
 	
+	
 	public Task3(String title, String project , LocalDate date) 
 	{
 		this.title = title;
@@ -59,7 +60,7 @@ public class Task3 implements Serializable{
 		this.date = date;
 	}
 
-
+   
 
 	public static String getDateFormat() {
 		return DATE_FORMAT;
@@ -70,8 +71,22 @@ public class Task3 implements Serializable{
 	public void setDone(boolean isDone) {
 		this.isDone = isDone;
 	}
+	
+	public void changeStatus() 
+	{
+		if(isDone == true)
+			isDone = false;
+		else
+			isDone = true;
+	}
 
-
+	public String getStatus() 
+	{
+		if(isDone == true)
+			return "done";
+		else
+			return "unDone";
+	}
 
 	public void setProject(String project) {
 		this.project = project;
@@ -147,11 +162,22 @@ public class Task3 implements Serializable{
 	@override
 	public String toString() {
 		
-		String s= "Title: "  + getTitle() + ",Date :" + getDate() + ",Project :" + getProject() + ",Completed :" +isDone + "\n";
+		String s= "Title: "  + getTitle() + ", Date :" + getDate() + ", Project :" + getProject() + ", Completed :" + isDone + "\n";
 		return s;
 				
 		
 		
 	}
+
+
+
+	public static String size() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	
 
 }

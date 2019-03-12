@@ -1,5 +1,6 @@
 package todolist3;
 
+import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -17,6 +18,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.InputMismatchException;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -31,11 +34,11 @@ import todolist2.ToDoList2;
 public class ToDoList3 implements Serializable
 
 {
-ArrayList<Task3> tasks = new ArrayList<>();
+static ArrayList<Task3> tasks = new ArrayList<>();
 Scanner scanner = new Scanner(System.in);
 
 
-public static final String filePath = "fileName";
+public static final String filePath = "database.txt";
 	
 	
 
@@ -106,7 +109,7 @@ public void remove(Task3 t)
 		@SuppressWarnings("unlikely-arg-type")
 		//List<Task3> k = tasks.stream().filter(x ->x.getDate().equals(date)).collect(Collectors.toList());
 		List <Task3> k = tasks.stream().sorted(Comparator.comparing(Task3::getDate)).collect(Collectors.toList());
-       
+		
 		System.out.println(k);
 		
 	}
@@ -118,15 +121,20 @@ public void remove(Task3 t)
 		System.out.println("(3) Exit");
 		System.out.println("(4) Filter by Project\n");
 		System.out.println("(5)  Show by Date\n");
+		System.out.println("(6) remove task \n ");
+		System.out.println("(7) edit"
+				+ " task \n ");
 		
 		Scanner scanner = new Scanner(System.in);
 		
 		int choice = scanner.nextInt();
+		scanner.nextLine();
 		switch(choice)
 		{
 		case 1:
 			System.out.println("Choice 1 selected  \n");
 			System.out.println(tasks);
+			printSize();
 			menu();
 			break;
 		case 2 :
@@ -152,6 +160,21 @@ public void remove(Task3 t)
 			menu();
 			break;
 			
+		case 6 :
+			System.out.println("Choice 6 selected\n");
+			removeTask();
+			menu();
+			break;	
+			
+		case 7 :
+			System.out.println("Choice 7 selected\n");
+			editTask();
+			menu();
+			break;
+		
+		 default:
+             System.out.println("Unrecognized command");	
+			
 		
 		}
 	}
@@ -165,7 +188,7 @@ public void remove(Task3 t)
 		
 		boolean success = false;
 		try {
-			FileOutputStream fos= new FileOutputStream (filePath);
+			FileOutputStream fos= new FileOutputStream (new File(filePath));
 			ObjectOutputStream ois = new ObjectOutputStream(fos);
 			ois.writeObject(tasks);
 			
@@ -178,16 +201,22 @@ public void remove(Task3 t)
 		return success;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void load() {
 		boolean success = false;
 		
 		try{
-			FileInputStream fis = new FileInputStream(filePath);
+			FileInputStream fis = new FileInputStream(new File(filePath));
 			ObjectInputStream ois = new ObjectInputStream(fis);
 			tasks = (ArrayList<Task3>) ois.readObject();
 			ois.close();
 			success = true; 
-			} catch (Exception e){
+			} 
+		catch(EOFException e) 
+		{
+			System.out.println("the file is empty");
+		}
+		catch (Exception e){
 				e.printStackTrace();
 	        }
 		if (success == true) {
@@ -198,13 +227,112 @@ public void remove(Task3 t)
 	
 	
 	
+	
+	public  void removeTask() 
+	{
+		System.out.println("Enter name of task");
+		Scanner scanner =new Scanner(System.in);
+		String name=scanner.nextLine();
+		Iterator<Task3>iterator = tasks.iterator();
+		while(iterator.hasNext())
+				{
+					
+					Task3 task=iterator.next();
+					if(task.getTitle().equals(name)) {
+						iterator.remove();
+						save();
+					}
+				}
+	}
+	
+	
+	public void editTask() {
+		System.out.println("Enter the name of task to edit");
+		
+		Scanner scanner = new Scanner(System.in);
+		String name = scanner.nextLine();
+		System.out.println("Enter the new name of the task ");
+		String newName = scanner.nextLine();
+		Iterator<Task3>iterator = tasks.iterator();
+				while(iterator.hasNext())
+				{
+					Task3 task=iterator.next();
+					if(task.getTitle().equals(name)) {
+						task.setTitle(newName);
+						save();
+					}
+				}
+	}
+	public void printSize() {
+		System.out.println("There are "+tasks.size() + "tasks");
+		
+	}
+	
+	
+	
+	
+	public int validateInt(int min, int max) 
+	{
+        Scanner scanner = new Scanner(System.in);
+		while(true) 
+		{
+			try 
+			{
+				System.out.println("Enter a number");
+	            //int index = input.nextInt();
+	            //input.nextLine();
+	    		int index = scanner.nextInt();
+	    		//scanner.nextLine();
+
+	    		if (index >= 0 && index < tasks.size()) {
+	    			System.out.println("Index is inside size of list");
+	    			return index;
+	    		}
+	    		else {} //please enter a vlaue from min to max
+			}
+			catch(Exception e) 
+			{
+				System.out.println("please enter a correct format");
+			}
+		}
+	}
+	
+	
+	public void toggleTaskDone()
+	{
+		if(tasks.size() <= 0){
+            System.out.println("Nothing to toggle, tasks list is empty");
+        }
+	        
+	    int index = validateInt(0, tasks.size());
+	    		
+		String status = tasks.get(index).getStatus();
+		System.out.println("this task is =  " + status);
+
+		System.out.println("do you want to change the status? (y/n)");
+		String instruction = scanner.nextLine();
+		
+		if(instruction.toLowerCase().equals("y"))
+			tasks.get(index).setDone(!tasks.get(index).isDone());
+		else if(instruction.toLowerCase().equals("n")) {}
+		// do nothing
+		else 
+			{
+				System.out.println("please write y or n");
+			}	
+				
+	     
+	}
+	
 	public static void main(String[] args)  {
 			
 			
 		ToDoList3 toDoList = new ToDoList3(); 
 			toDoList.load();
 		toDoList.menu();
-		
+		toDoList.toggleTaskDone();
+		//toDoList.printSize();
+		System.out.println("There are "+tasks.size() + "tasks");
 			
 			
 	}
