@@ -337,7 +337,7 @@ public void remove(Task3 t)
 			
 	}
 	
-			
+	// check showdate,remove task,edit task		
 			
 			
 			
