@@ -12,7 +12,7 @@ import java.util.Scanner;
 
 import todolist2.override;
 
-public class Task3 implements Serializable{
+public class Task implements Serializable{
 	
 	private static final String DATE_FORMAT = null;
 	private String title;
@@ -23,7 +23,7 @@ public class Task3 implements Serializable{
 	
 	
 	
-	public Task3(String title, String project , LocalDate date) 
+	public Task(String title, String project , LocalDate date) 
 	{
 		this.title = title;
 		this.project = project;
@@ -33,7 +33,7 @@ public class Task3 implements Serializable{
 	
 	
 	
-	public Task3() {
+	public Task() {
 		// TODO Auto-generated constructor stub
 	}
 
@@ -124,65 +124,12 @@ public class Task3 implements Serializable{
 	}
 	
 
-
-	public LocalDate getDateValidator() {
-			System.out.println("please enter the correct date format dd/MM/yyyy");
-			boolean isDueDate = false;
-			LocalDate date = null;
-			do {
-				Scanner scan = null;
-				String userInput = scan.nextLine();
-				try {
-					DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy  ");
-					date = LocalDate.parse(userInput, dateFormat);
-					System.out.println(date);
-					isDueDate = true;
-					if (date.isBefore(LocalDate.now())) throw new IllegalArgumentException("wrong date is entered");
-					} catch (IllegalArgumentException e) {
-
-			               System.out.println("date cannot be before today");
-
-			               isDueDate = false;
-			           } catch (DateTimeParseException exc) {
-			               // TODO Auto-generated catch block
-			               System.out.println("correct date format is \"dd/MM/yyyy\"");
-			           }
-
-			       } while (!isDueDate);
-			return date;
-			      
-			 
-			
-			
-		}	
-		
-		
-		
-				
-		
-	
-	
-	
-	
 	@override
 	public String toString() {
 		
 		String s= "Title: "  + getTitle() + ", Date :" + getDate() + ", Project :" + getProject() + ", Completed :" + isDone + "\n";
 		return s;
-				
-		
-		
+						
 	}
-
-
-
-	public static String size() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-
-	
 
 }
