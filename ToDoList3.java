@@ -35,6 +35,7 @@ public class ToDoList3 implements Serializable
 
 {
 static ArrayList<Task3> tasks = new ArrayList<>();
+private static final long serialVersionUID=1L;
 Scanner scanner = new Scanner(System.in);
 
 
@@ -116,14 +117,14 @@ public void remove(Task3 t)
   
 	public void menu() {
 		
-		System.out.println("(1) Show Task List\n");
-		System.out.println("(2)Add new  Task \n");
-		System.out.println("(3) Exit");
-		System.out.println("(4) Filter by Project\n");
-		System.out.println("(5)  Show by Date\n");
-		System.out.println("(6) remove task \n ");
-		System.out.println("(7) edit"
-				+ " task \n ");
+		System.out.println("\n(1) Show Task List");
+		System.out.println("\n(2)Add new  Task ");
+		System.out.println("\n(3) Exit");
+		System.out.println("\n(4) Filter by Project");
+		System.out.println("\n(5)  Show by Date");
+		System.out.println("\n(6) remove task  ");
+		System.out.println("\n(7) edit task  ");
+		System.out.println("\n(8) toggle task  ");
 		
 		Scanner scanner = new Scanner(System.in);
 		
@@ -169,8 +170,15 @@ public void remove(Task3 t)
 		case 7 :
 			System.out.println("Choice 7 selected\n");
 			editTask();
+			//toggleTaskDone();
 			menu();
 			break;
+		case 8 :
+			System.out.println("Choice 8 selected\n");
+			toggleTaskDone();
+			
+			menu();
+			break;	
 		
 		 default:
              System.out.println("Unrecognized command");	
@@ -203,6 +211,10 @@ public void remove(Task3 t)
 	
 	@SuppressWarnings("unchecked")
 	public void load() {
+		File f =new File("database.txt");
+		if(f.exists())
+		
+		{
 		boolean success = false;
 		
 		try{
@@ -218,10 +230,12 @@ public void remove(Task3 t)
 		}
 		catch (Exception e){
 				e.printStackTrace();
+				
 	        }
 		if (success == true) {
 			System.out.println("Load is successful");
 	        }
+		}
 		
 		}
 	
@@ -264,7 +278,7 @@ public void remove(Task3 t)
 				}
 	}
 	public void printSize() {
-		System.out.println("There are "+tasks.size() + "tasks");
+		System.out.println("There are in total "+tasks.size() + "tasks in the list");
 		
 	}
 	
@@ -313,7 +327,7 @@ public void remove(Task3 t)
 		String instruction = scanner.nextLine();
 		
 		if(instruction.toLowerCase().equals("y"))
-			tasks.get(index).setDone(!tasks.get(index).isDone());
+			tasks.get(index).toggle();
 		else if(instruction.toLowerCase().equals("n")) {}
 		// do nothing
 		else 

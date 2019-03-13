@@ -19,6 +19,7 @@ public class Task3 implements Serializable{
 	private LocalDate date;
 	private boolean isDone;
 	private String project;
+	private static final long serialVersionUID=1L;
 	
 	
 	
@@ -106,6 +107,10 @@ public class Task3 implements Serializable{
 		
 	}
 	
+	public void toggle()
+	{
+		isDone=!isDone;
+	}
 	
 	public void markasDone() {
 		isDone =true;
@@ -128,7 +133,7 @@ public class Task3 implements Serializable{
 				Scanner scan = null;
 				String userInput = scan.nextLine();
 				try {
-					DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+					DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy  ");
 					date = LocalDate.parse(userInput, dateFormat);
 					System.out.println(date);
 					isDueDate = true;
