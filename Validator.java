@@ -17,7 +17,7 @@ public class Validator
 				System.out.println("Enter a number");
 				int index = scanner.nextInt();
 
-				if (index >= min && index < max) {
+				if (index >= min && index <= max) {
 					System.out.println("Index is inside size of list");
 					return index;
 				} else {
@@ -48,7 +48,7 @@ public class Validator
 	}
 	
 	
-	/*public static LocalDate getDateValidator()
+	public static LocalDate getDateValidator()
 	{
 		System.out.println("please enter the correct date format dd/MM/yyyy");
 		boolean isDueDate = false;
@@ -75,7 +75,7 @@ public class Validator
 		       } while (!isDueDate);
 		return date;
 		      
-	}	*/
+	}	
 	
 	
 	
