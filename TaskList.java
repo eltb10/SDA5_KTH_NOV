@@ -41,7 +41,7 @@ public class TaskList implements Serializable
 
 		System.out.print("Please enter the task date with format:dd/MM/yyyy  \n");
 		LocalDate date = Validator.validateDate();
-
+		//LocalDate  date= Validator.getDateValidator();
 		Task tt = new Task(title, project, date);
 		if (tasks == null) {
 			System.out.println("It is NULL");
