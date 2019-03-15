@@ -1,7 +1,5 @@
 package todolist3;
 
-import java.util.Scanner;
-
 public class Controller 
 {
 	private TaskList taskList;
@@ -12,12 +10,11 @@ public class Controller
 		taskList = new TaskList();
 	}
 	
-	//TODO move the save and load to another class, move validation to another class
-	//TODO the validation class will have 2 methods at least to validate date and user number input
+	
 	public void start() 
 	{
 		while (true) {
-			System.out.println("Welcome to ToDoLy");
+			System.out.println("\n Welcome to ToDoLy");
 			System.out.println("You have X tasks todo and Y tasks are done!");
 			System.out.println("Pick an option:\n");
 			System.out.println("(1) Show Task List");
@@ -66,6 +63,7 @@ public class Controller
 				taskList.editTask();
 				// toggleTaskDone();
 				break;
+			
 			case 8:
 				System.out.println("Choice 8 selected\n");
 				taskList.toggleTaskDone();

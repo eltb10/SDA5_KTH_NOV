@@ -17,7 +17,7 @@ public class Validator
 				System.out.println("Enter a number");
 				int index = scanner.nextInt();
 
-				if (index >= min && index < max) {
+				if (index >= min && index <= max) {
 					System.out.println("Index is inside size of list");
 					return index;
 				} else {
@@ -35,20 +35,25 @@ public class Validator
 		String dateString;
 		LocalDate date = null;
 		DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		boolean success=false;
 		do {
 			try {
 				dateString = scanner.nextLine();
 				date = LocalDate.parse(dateString, dateFormat);
+				success=true;
+				if(date.compareTo(LocalDate.now()) < 0)
+					success=false;
 				
 			} catch (Exception e) {
 				System.out.println("please enter the correct format : dd/MM/yyyy" + "");
 			}
-		} while (date.compareTo(LocalDate.now()) < 0);
+		} while (success==false);
+		
 		return date;
 	}
 	
 	
-	/*public static LocalDate getDateValidator()
+	public static LocalDate getDateValidator()
 	{
 		System.out.println("please enter the correct date format dd/MM/yyyy");
 		boolean isDueDate = false;
@@ -75,7 +80,7 @@ public class Validator
 		       } while (!isDueDate);
 		return date;
 		      
-	}	*/
+	}	
 	
 	
 	
