@@ -1,3 +1,5 @@
+package todolist3;
+
  
 
 
@@ -124,7 +126,7 @@ public class TaskList implements Serializable
 	{
 		printSize();
 		for(Task task : tasks) {
-			System.out.println(task.getTitle() + " " + task.getProject() + " " + task.getDate().toString() + " " + task.getStatus());
+			System.out.println("Title :" + "" + task.getTitle() + " " + "Project :" + "" + task.getProject() + " " + "Title :" + "" + task.getDate().toString() + " " + "Status :" + "" + task.getStatus());
 		}
 		
 		//printWithIndex();

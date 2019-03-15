@@ -1,5 +1,6 @@
- 
+package todolist3;
 
+ 
 public class Controller 
 {
 	private TaskList taskList;
@@ -63,24 +64,7 @@ public class Controller
 				taskList.editTask();
 				// toggleTaskDone();
 				break;
-<<<<<<< HEAD
-=======
 
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
->>>>>>> a329093103d58efbc12620bb5f5614350ac04c8f
 			
 			case 8:
 				System.out.println("Choice 8 selected\n");

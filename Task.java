@@ -1,3 +1,5 @@
+package todolist3;
+
  
 
 import java.io.Serializable;
@@ -121,9 +123,16 @@ public class Task implements Serializable{
 	@Override
 	public String toString() {
 		
-		String s= "Title: "  + getTitle() + ", Date :" + getDate() + ", Project :" + getProject() + ", Completed :" + isDone + "\n";
+		String s= " Title: "  + getTitle() + ", Date : " + getDate() + ", Project : " + getProject() + ", Completed : " + isDone + "\n";
 		return s;
 						
 	}
+
+
+
+	
+
+
+
 
 }
