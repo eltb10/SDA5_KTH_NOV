@@ -1,4 +1,4 @@
-package todolist3;
+ 
 
 import java.io.EOFException;
 import java.io.File;
@@ -77,4 +77,8 @@ public class FileHandler {
 	return tasks;
 	}
 
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> a329093103d58efbc12620bb5f5614350ac04c8f
